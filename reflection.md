@@ -8,15 +8,16 @@ Answer each question in 3 to 5 sentences. Be specific and honest about what actu
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
+  Firstly, I entered 1 but the hint told me to go lower, which makes no sense because the range is between 1 and 100. Next, I noticed that I was able to enter negative numbers and numbers above 100 which shouldn't be possible. The hints are logically wrong, when I submit a number lower than the secret number, it tells me to go even lower. Whenever I click play a new game and I try to submit a new guess, it just doesn't work. The game seems to break when the user tries to restart. I noticed that the history doesn't show my attempts unless I click submit twice.
+
 **Bug Reproduction Log**
 
 Document at least 3 bugs you found. Add rows as needed.
 
-| Input | Expected Behavior | Actual Behavior | Console Output / Error |
-|-------|-------------------|-----------------|------------------------|
-| | | | |
-| | | | |
-| | | | |
+| Input    |Expected Behavior | Actual Behavior | Console Output / Error |
+|guess of 1|"Go higher".      |"Go lower".      | none|
+|guess of 90|"Go lower".      | "Go higher".    | none|
+|clicking new game button| starts a new game | nothing happens| none|
 
 ---
 
@@ -26,6 +27,7 @@ Document at least 3 bugs you found. Add rows as needed.
 - Give one example of an AI suggestion that was correct (including what the AI suggested and how you verified the result).
 - Give one example of an AI suggestion that was incorrect or misleading (including what the AI suggested and how you verified the result).
 
+I used Claude code. When I first asked Claude to fix the logic error in check_guess(), it claimed it did but I played the game and there was no change. So I asked Claude to recheck if it actually implemented the fix.
 ---
 
 ## 3. Debugging and testing your fixes
@@ -35,6 +37,7 @@ Document at least 3 bugs you found. Add rows as needed.
   and what it showed you about your code.
 - Did AI help you design or understand any tests? How?
 
+Firstly I played the game to make sure everything ran was expected. I asked Claude to write a pytest to test if a new game was started when the user clicked new game. This showed me that the original code was broken, specifically the attempts counter, status, and history. I prompted Claude to write tests for different functions.
 ---
 
 ## 4. What did you learn about Streamlit and state?

@@ -31,13 +31,15 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📸 Demo Walkthrough
 
-Describe your fixed game in numbered steps so a reader can follow along without watching a video:
+Sample game on **Normal** difficulty (range 1–100, 8 attempts, secret = 63, starting score = 0):
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+1. The app loads. The sidebar shows "Range: 1 to 100" and "Attempts allowed: 8". Score is 0.
+2. User types 50 and clicks Submit → hint reads "📈 Go Higher!" (correct: 50 < 63). Score: −5 (attempt 1, Too Low).
+3. User types 75 → hint reads "📉 Go Lower!" (correct: 75 > 63). Score: 0 (attempt 2, Too High on an even attempt = +5).
+4. User types 60 → hint reads "📈 Go Higher!" (correct: 60 < 63). Score: −5 (attempt 3, Too Low).
+5. User types 65 → hint reads "📉 Go Lower!" (correct: 65 > 63). Score: 0 (attempt 4, Too High on even attempt = +5).
+6. User types 63 → "🎉 Correct!" Balloons fire. Score: +40 (win on attempt 5: 100 − 10×6 = 40). Final score: 40.
+7. The input and Submit button are locked. Clicking "New Game" resets attempts, score, history, and status.
 
 **Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
 

@@ -43,6 +43,7 @@ Firstly I played the game to make sure everything ran was expected. I asked Clau
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+Session_state is a persistent dictionary that lets you preserve your state and variables because streamlit reruns the python script for every user interaction.
 
 ---
 
@@ -52,3 +53,5 @@ Firstly I played the game to make sure everything ran was expected. I asked Clau
   - This could be a testing habit, a prompting strategy, or a way you used Git.
 - What is one thing you would do differently next time you work with AI on a coding task?
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+
+I want to get into the habit of writing tests for my code or even when coding with AI assistants asking them to check if they actually implemented intended changes. Next time, I'd experiment with different models, perhaps CodeEx and try to build something from scratch using it. I think AI generated code can be a hit or miss, I've heard of stories of vibe coded apps having awful security or being outright illegal. It's ultimately up to the person who's prompting the models to code responsibly with AI.

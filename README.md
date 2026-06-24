@@ -25,9 +25,24 @@ It wrote the code, ran away, and now the game is unplayable.
 
 ## 📝 Document Your Experience
 
-- [ ] Describe the game's purpose.
-- [ ] Detail which bugs you found.
-- [ ] Explain what fixes you applied.
+Game purpose: A number-guessing game where the player picks a difficulty, then narrows down a secret number using Higher/Lower hints. The goal is to guess correctly in as few attempts as possible to maximize score.
+
+Bugs found:
+
+1. Swapped hint messages (`check_guess`) — When a guess was too high, the message said "Go HIGHER!" and when too low it said "Go LOWER!"
+
+2. Secret cast to string on even attempts (`app.py`) — Every even-numbered attempt converted the secret integer to a string before passing it to `check_guess`.
+
+3. New Game button doesn't reset `status` — Clicking New Game reset `attempts` and generated a new secret, but left `st.session_state.status` as `"won"` or `"lost"`.
+
+4. New Game uses hardcoded range — `random.randint(1, 100)` was hardcoded regardless of difficulty, so a new Easy game (range 1–20) would still pick a secret up to 100.
+
+Fixes applied:
+
+- In `check_guess`: swapped the hint messages so `"Too High"` pairs with "Go LOWER!" and `"Too Low"` pairs with "Go HIGHER!". Removed the string-comparison fallback entirely by keeping the secret as an `int` at all times.
+- In `app.py`: removed the even/odd attempt type-switching block so `secret` is always passed as an integer to `check_guess`.
+- In the New Game handler: added `st.session_state.status = "playing"` and `st.session_state.history = []`, and replaced the hardcoded `random.randint(1, 100)` with `random.randint(low, high)` using the difficulty-aware range.
+- Moved `get_range_for_difficulty`, `parse_guess`, `check_guess`, and `update_score` into `logic_utils.py` and imported them in `app.py`.
 
 ## 📸 Demo Walkthrough
 
@@ -46,9 +61,18 @@ Sample game on **Normal** difficulty (range 1–100, 8 attempts, secret = 63, st
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+$ pytest tests/ -v
+============================= test session starts ==============================
+platform darwin -- Python 3.14.5, pytest-9.0.3, pluggy-1.6.0
+collected 5 items
+
+tests/test_game_logic.py::test_winning_guess PASSED                      [ 20%]
+tests/test_game_logic.py::test_guess_too_high PASSED                     [ 40%]
+tests/test_game_logic.py::test_guess_too_low PASSED                      [ 60%]
+tests/test_game_logic.py::test_win_on_first_attempt_scores_90 PASSED     [ 80%]
+tests/test_game_logic.py::test_new_game_resets_state PASSED              [100%]
+
+============================== 5 passed in 0.26s ===============================
 ```
 
 ## 🚀 Stretch Features
